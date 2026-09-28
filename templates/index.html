@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitBuddy - AI Workout Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1f2937, #111827);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #f3f4f6;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #facc15, #fb923c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      margin: 14px 0 6px;
+      color: #d1d5db;
+    }
+    :root { color-scheme: dark; } /* keeps native dropdown popups dark-themed too */
+    input, select {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #f9fafb;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input::placeholder { color: #9ca3af; }
+    input:focus, select:focus { border-color: #fb923c; }
+
+    /* Custom select styling — native arrow removed and replaced so it
+       matches the dark theme instead of showing a mismatched browser default */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f9fafb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+    select option {
+      background: #1f2937;
+      color: #f9fafb;
+    }
+    button {
+      width: 100%;
+      margin-top: 26px;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(59,130,246,0.4);
+    }
+    .nav-link {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      color: #93c5fd;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+    .nav-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🏋️ FitBuddy</h1>
+    <p class="subtitle">AI Workout Generator — powered by Gemini</p>
+    <p class="subtitle" style="margin-top:-14px;">Your User ID is assigned automatically after you submit — no need to pick one.</p>
+
+    <form action="/generate-workout" method="post">
+      <label for="username">Name</label>
+      <input type="text" id="username" name="username" placeholder="Your name" required>
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" placeholder="e.g. 25" required>
+
+      <label for="weight">Weight (kg)</label>
+      <input type="number" step="0.1" id="weight" name="weight" placeholder="e.g. 70" required>
+
+      <label for="goal">Fitness Goal</label>
+      <input type="text" id="goal" name="goal" placeholder="e.g. weight loss, muscle gain" required>
+
+      <label for="intensity">Workout Intensity</label>
+      <select id="intensity" name="intensity" required>
+        <option value="" disabled selected>Select intensity</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+
+      <button type="submit">Generate Plan</button>
+    </form>
+
+    <a class="nav-link" href="/admin-login">Admin login →</a>
+  </div>
+</body>
+</html>
